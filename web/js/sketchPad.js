@@ -10,6 +10,14 @@ class SketchPad {
     `;
     container.appendChild(this.canvas);
 
+    //undo
+    const lineBreak = document.createElement('br');
+    container.appendChild(lineBreak);
+
+    this.undoBtn = document.createElement('button');
+    this.undoBtn.innerHTML = "UNDO";
+    container.appendChild(this.undoBtn);
+
     // to draw using mouse
     this.ctx = this.canvas.getContext('2d');
     // # means private method
@@ -56,6 +64,12 @@ class SketchPad {
     this.canvas.ontouchend = () => {
       this.canvas.onmouseup();
     }
+
+    //undo
+    this.undoBtn.onclick = () => {
+      this.paths.pop();
+      this.#redraw();
+    }
   }
 
   #getMouse = (evt) => {
@@ -70,6 +84,12 @@ class SketchPad {
     this.ctx.clearRect(0, 0,
       this.canvas.width, this.canvas.height);
     draw.paths(this.ctx, this.paths);
+
+    if(this.paths.length > 0) {
+      this.undoBtn.disabled = false;
+    } else {
+      this.undoBtn.disabled = true;
+    }
   }
 
 
