@@ -20,10 +20,16 @@ class SketchPad {
 
     // to draw using mouse
     this.ctx = this.canvas.getContext('2d');
-    // # means private method
-    this.#addEventListeners();
     this.paths = [];
     this.isDrawing = false;
+    this.#redraw();
+    // # means private method
+    this.#addEventListeners();
+  }
+  reset() {
+    this.paths = [];
+    this.isDrawing = false;
+    this.#redraw();
   }
 
   #addEventListeners() {
