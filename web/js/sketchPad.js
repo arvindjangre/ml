@@ -14,7 +14,7 @@ class SketchPad {
     this.ctx = this.canvas.getContext('2d');
     // # means private method
     this.#addEventListeners();
-    this.path = [];
+    this.paths = [];
     this.isDrawing = false;
   }
 
@@ -25,7 +25,7 @@ class SketchPad {
       const mouse = this.#getMouse(evt);
       // console.log(mouse);
 
-      this.path = [mouse];
+      this.paths.push([mouse]);
       this.isDrawing = true;
     }
 
@@ -35,8 +35,8 @@ class SketchPad {
         // coordinates x,y
         const mouse = this.#getMouse(evt);
         // console.log(mouse);
-
-        this.path.push(mouse);
+        const lastPath = this.paths[this.paths.length-1];
+        lastPath.push(mouse);
         this.#redraw();
       }
     }
@@ -56,7 +56,7 @@ class SketchPad {
   #redraw() {
     this.ctx.clearRect(0, 0,
       this.canvas.width, this.canvas.height);
-    draw.path(this.ctx, this.path);
+    draw.paths(this.ctx, this.paths);
   }
 
 
