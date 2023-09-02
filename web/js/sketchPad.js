@@ -14,18 +14,50 @@ class SketchPad {
     this.ctx = this.canvas.getContext('2d');
     // # means private method
     this.#addEventListeners();
-
+    this.path = [];
+    this.isDrawing = false;
   }
 
   #addEventListeners() {
     this.canvas.onmousedown = (evt) => {
       const rect = this.canvas.getBoundingClientRect();
       // coordinates x,y
-      const mouse = [
-        evt.clientX - rect.left,
-        evt.clientY - rect.top
-      ];
-      console.log(mouse);
+      const mouse = this.#getMouse(evt);
+      // console.log(mouse);
+
+      this.path = [mouse];
+      this.isDrawing = true;
+    }
+
+    this.canvas.onmousemove = (evt) => {
+      if (this.isDrawing) {
+        const rect = this.canvas.getBoundingClientRect();
+        // coordinates x,y
+        const mouse = this.#getMouse(evt);
+        // console.log(mouse);
+
+        this.path.push(mouse);
+        this.#redraw();
+      }
+    }
+    this.canvas.onmouseup = () => {
+      this.isDrawing = false;
     }
   }
+
+  #getMouse = (evt) => {
+    const rect = this.canvas.getBoundingClientRect();
+    return [
+      Math.round(evt.clientX - rect.left),
+      Math.round(evt.clientY - rect.top)
+    ];
+  }
+
+  #redraw() {
+    this.ctx.clearRect(0, 0,
+      this.canvas.width, this.canvas.height);
+    draw.path(this.ctx, this.path);
+  }
+
+
 }
