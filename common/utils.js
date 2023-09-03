@@ -1,10 +1,10 @@
 // progress bar
 const utils = {};
-utils.formatPercent = () => {
+utils.formatPercent = (n) => {
   return (n * 100).toFixed(2) + '%';
 }
 
-utils.printProgress = (cont, max) => {
+utils.printProgress = (count, max) => {
   process.stdout.clearLine();
   process.stdout.cursorTo(0);
   const percent = utils.formatPercent(
