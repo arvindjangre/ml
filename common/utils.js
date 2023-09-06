@@ -1,5 +1,10 @@
 // progress bar
 const utils = {};
+
+utils.flaggedUsers = [
+  1663855324959, 1663855329877, 1663855369903
+]
+
 utils.formatPercent = (n) => {
   return (n * 100).toFixed(2) + '%';
 }
