@@ -1,4 +1,4 @@
-body{
+body {
   font-family: Arial;
   background-color: skyblue;
   overscroll-behavior: none;
@@ -23,7 +23,9 @@ button {
 button:hover {
   background-color: mediumblue;
 }
-button:disabled, button:disabled:hover{
+
+button:disabled,
+button:disabled:hover {
   background-color: gray;
   cursor: default;
 }
@@ -33,12 +35,22 @@ button:disabled, button:disabled:hover{
   align-items: center;
 }
 
-.thumb{
-  width: 10%;
+.thumb {
+  width: 100%;
 }
+
 .rowLabel {
-  width: 15%;
+  flex: 2 1 0;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+}
+
+.sampleContainer {
+  flex: 1 1 0;
+  background-color: white;
+  text-align: center;
+  border-radius: 10%;
+  margin: 1px;
+  overflow: hidden;
 }

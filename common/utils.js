@@ -18,6 +18,7 @@ utils.groupBy = (objArray, key) => {
   for (let obj of objArray) {
     const val = obj[key];
     if(groups[val] == null) {
+      // initialize
       groups[val] = [];
     }
     groups[val].push(obj);
