@@ -5,14 +5,14 @@ utils.flaggedUsers = [
   1663855324959, 1663855329877, 1663855369903
 ]
 utils.styles = {
-  car: 'gray',
-  fish: 'red',
-  house: 'yellow',
-  tree: 'green',
-  bicycle: 'cyan',
-  guitar: 'blue',
-  pencil: 'magenta',
-  clock: 'lightgray',
+  car: { color: 'gray', text: '🚗' },
+  fish: { color: 'red', text: '🐠' },
+  house: { color: 'yellow', text: '🏠' },
+  tree: { color: 'green', text: '🌳' },
+  bicycle: { color: 'cyan', text: '🚲' },
+  guitar: { color: 'blue', text: '🎸' },
+  pencil: { color: 'magenta', text: '✏' },
+  clock: { color: 'lightgray', text: '🕒' },
 };
 
 utils.formatPercent = (n) => {
@@ -23,16 +23,16 @@ utils.printProgress = (count, max) => {
   process.stdout.clearLine();
   process.stdout.cursorTo(0);
   const percent = utils.formatPercent(
-    count/max
+    count / max
   );
-  process.stdout.write(count+'/'+max+ ' (' + percent + ')');
+  process.stdout.write(count + '/' + max + ' (' + percent + ')');
 }
 
 utils.groupBy = (objArray, key) => {
   const groups = {};
   for (let obj of objArray) {
     const val = obj[key];
-    if(groups[val] == null) {
+    if (groups[val] == null) {
       // initialize
       groups[val] = [];
     }
@@ -41,6 +41,6 @@ utils.groupBy = (objArray, key) => {
   return groups;
 }
 
-if(typeof module !== 'undefined') {
-  module.exports = utils; 
+if (typeof module !== 'undefined') {
+  module.exports = utils;
 }
