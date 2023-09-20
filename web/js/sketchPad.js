@@ -1,5 +1,5 @@
 class SketchPad {
-  constructor(container, size = 400) {
+  constructor(container, onUpdate=null, size = 400) {
     // make a canvas where we can draw
     this.canvas = document.createElement("canvas");
     this.canvas.width = size;
@@ -20,6 +20,7 @@ class SketchPad {
 
     // to draw using mouse
     this.ctx = this.canvas.getContext('2d');
+    this.onUpdate = onUpdate;
     this.paths = [];
     this.isDrawing = false;
     this.#redraw();
@@ -95,6 +96,13 @@ class SketchPad {
       this.undoBtn.disabled = false;
     } else {
       this.undoBtn.disabled = true;
+    }
+    this.triggerUpdate();
+  }
+
+  triggerUpdate(){
+    if(this.onUpdate) {
+      this.onUpdate(this.paths);
     }
   }
 
