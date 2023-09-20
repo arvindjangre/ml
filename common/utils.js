@@ -15,6 +15,8 @@ utils.styles = {
   clock: { color: 'lightgray', text: '🕒' },
 };
 
+utils.styles['?'] = {color: 'red', text: '❓'};
+
 utils.formatPercent = (n) => {
   return (n * 100).toFixed(2) + '%';
 }
@@ -48,20 +50,16 @@ utils.distance=(p1,p2)=>{
   );
 }
 
-utils.getNearest=(loc,points)=>{
-  let minDist=Number.MAX_SAFE_INTEGER;
-  let nearestIndex=0;
+utils.getNearest=(loc,points, k = 1)=>{
+  const obj = points.map((val, ind) => {
+    return {ind, val}
+  });
+  const sorted = obj.sort((a, b) => {
+    return utils.distance(loc, a.val) - utils.distance(loc, b.val)
+  });
 
-  for(let i=0;i<points.length;i++){
-     const point=points[i];
-     const d=utils.distance(loc,point);
-
-     if(d<minDist){
-        minDist=d;
-        nearestIndex=i;
-     }
-  }
-  return nearestIndex;
+  const indices = sorted.map((obj) => obj.ind);
+  return indices.slice(0, k);
 }
 
 utils.invLerp = (min, max, v) => {
